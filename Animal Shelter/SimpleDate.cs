@@ -1,47 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace AnimalShelter
 {
     /// <summary>
-    /// A simple class to store dates.
-    /// 
-    /// This class is called SimpleDate because it's a simplyfied version of 
-    /// the .Net DateTime object. SimpleDate hides the more complex interface of DateTime
-    /// and makes it easy to  work with dates only.
+    ///     A simple class to store dates.
+    ///     This class is called SimpleDate because it's a simplyfied version of
+    ///     the .Net DateTime object. SimpleDate hides the more complex interface of DateTime
+    ///     and makes it easy to  work with dates only.
     /// </summary>
-    class SimpleDate
+    internal class SimpleDate
     {
         private DateTime date;
 
         /// <summary>
-        /// The day of the month
-        /// </summary>
-        public int Day
-        {
-            get { return date.Day; }
-        }
-
-        /// <summary>
-        /// The month of the year
-        /// </summary>
-        public int Month
-        {
-            get { return date.Month; }
-        }
-
-        /// <summary>
-        /// The year
-        /// </summary>
-        public int Year
-        {
-            get { return date.Year; }
-        }
-
-        /// <summary>
-        /// Creates a SimpleDate object whicht stores the given date.
+        ///     Creates a SimpleDate object whicht stores the given date.
         /// </summary>
         /// <param name="day">The day of the month</param>
         /// <param name="month">The month of the year</param>
@@ -51,22 +23,47 @@ namespace AnimalShelter
             date = new DateTime(year, month, day);
         }
 
+        public SimpleDate(DateTime date) : this(date.Day, date.Month, date.Year) {}
+
         /// <summary>
-        /// Get the number of days between this object's date and the given date.
+        ///     The day of the month
+        /// </summary>
+        public int Day
+        {
+            get { return date.Day; }
+        }
+
+        /// <summary>
+        ///     The month of the year
+        /// </summary>
+        public int Month
+        {
+            get { return date.Month; }
+        }
+
+        /// <summary>
+        ///     The year
+        /// </summary>
+        public int Year
+        {
+            get { return date.Year; }
+        }
+
+        /// <summary>
+        ///     Get the number of days between this object's date and the given date.
         /// </summary>
         /// <param name="date">The end date.</param>
         /// <returns>The number of days between this date and endDate.</returns>
-        public int DaysDifference(SimpleDate date) 
+        public int DaysDifference(SimpleDate date)
         {
             TimeSpan timespan = date.date.Subtract(this.date);
             return timespan.Days;
         }
 
         /// <summary>
-        /// Returns the date info in the form DD-MM-YYYY (e.g. "04-11-2013").
-        /// 
-        /// Note: Every class inherits (automagically) from the 'Object' class,
-        /// which contains the virtual ToString method which you can override for your own good.
+        ///     Returns the date info in the form DD-MM-YYYY (e.g. "04-11-2013").
+        ///     Note: Every class inherits (automagically) from the 'Object' class,
+        ///     which contains the virtual ToString method which you can override for your own good.
         /// </summary>
         /// <returns></returns>
         public override string ToString()
