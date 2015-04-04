@@ -22,15 +22,15 @@
         /// </param>
         /// <param name="dateOfBirth">The date of birth of the animal or null if unknown</param>
         /// <param name="name">The name of the animal or null if unknown</param>
-        protected Animal(int chipRegistrationNumber, SimpleDate dateOfBirth, string name)
+        /// <param name="gender">The gender of the animal</param>
+        protected Animal(int chipRegistrationNumber, SimpleDate dateOfBirth, string name, Gender gender)
         {
             ChipRegistrationNumber = chipRegistrationNumber;
             DateOfBirth = dateOfBirth;
             Name = name;
+            Gender = gender;
             Reserved = false;
         }
-
-        // Backing fields for properties, see actual properties for their description.
 
         /// <summary>
         ///     A five digit number containing the registration number of the animal.
@@ -46,6 +46,11 @@
         ///     The name of the animal. Contains null if unknown.
         /// </summary>
         public string Name { get; private set; }
+
+        /// <summary>
+        ///     The gender of the animal
+        /// </summary>
+        public Gender Gender { get; set; }
 
         /// <summary>
         ///     Is the animal reserved yes or no.
@@ -78,12 +83,19 @@
         /// </returns>
         public override string ToString()
         {
-            string dateOfBirthString = DateOfBirth == null ? "00-00-0000" : DateOfBirth.ToString();
-            string nameString = string.IsNullOrEmpty(Name) ? "noname" : Name;
-            string isReservedString = Reserved ? "reserved" : "not reserved";
-
-            return string.Format("{0}, {1}, {2}, {3}, {4}", ChipRegistrationNumber.ToString("D5"), dateOfBirthString, nameString,
-                isReservedString, Price.ToString("C"));
+            return string.Format("{0}, {1}, {2}, {3}, {4}, {5}",
+                ChipRegistrationNumber.ToString("D5"),
+                DateOfBirth == null ? "00-00-0000" : DateOfBirth.ToString(),
+                string.IsNullOrEmpty(Name) ? "noname" : Name,
+                Reserved ? "reserved" : "not reserved",
+                Price.ToString("C"),
+                Gender);
         }
+    }
+
+    internal enum Gender
+    {
+        Male,
+        Female
     }
 }

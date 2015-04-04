@@ -18,15 +18,19 @@ namespace AnimalShelter
         public AdministrationForm()
         {
             InitializeComponent();
+            ddbGender.DataSource = Enum.GetValues(typeof (Gender));
+            ddbGender.SelectedIndex = 0;
+
             animalTypeComboBox.SelectedIndex = 0;
             CreateFakeData();
         }
 
         private void CreateFakeData()
         {
-            AddAnimal(new Dog(12345, new SimpleDate(DateTime.Today.AddYears(-5)), "Hector",
-                new SimpleDate(DateTime.Now)));
-            AddAnimal(new Cat(12456, new SimpleDate(DateTime.Today.AddYears(-7)), "Henk", "Shits in the hallway"));
+            AddAnimal(new Dog(12345, new SimpleDate(DateTime.Today.AddYears(-5)), "Hector", new SimpleDate(DateTime.Now),
+                Gender.Male));
+            AddAnimal(new Cat(12456, new SimpleDate(DateTime.Today.AddYears(-7)), "Henk", "Shits in the hallway",
+                Gender.Male));
         }
 
         private void AddAnimal(Animal a)
@@ -56,11 +60,12 @@ namespace AnimalShelter
             Animal a;
             if (animalTypeComboBox.Text == "Dog")
             {
-                a = new Dog(registrationNumber, dateOfBirth, name, new SimpleDate(dtpLastWalked.Value));
+                a = new Dog(registrationNumber, dateOfBirth, name, new SimpleDate(dtpLastWalked.Value),
+                    (Gender) ddbGender.SelectedItem);
             }
             else
             {
-                a = new Cat(registrationNumber, dateOfBirth, name, tbBadHabits.Text);
+                a = new Cat(registrationNumber, dateOfBirth, name, tbBadHabits.Text, (Gender) ddbGender.SelectedItem);
             }
 
             AddAnimal(a);

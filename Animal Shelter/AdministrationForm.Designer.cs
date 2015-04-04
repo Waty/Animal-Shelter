@@ -43,6 +43,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.dtpLastWalked = new System.Windows.Forms.DateTimePicker();
             this.tbBadHabits = new System.Windows.Forms.TextBox();
+            this.lGender = new System.Windows.Forms.Label();
+            this.ddbGender = new System.Windows.Forms.ComboBox();
             this.gbAnimals = new System.Windows.Forms.GroupBox();
             this.lbFreeAnimals = new System.Windows.Forms.ListBox();
             this.cmsFreeAnimals = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -93,7 +95,7 @@
             this.lChipRegistrationNumber.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lChipRegistrationNumber.Location = new System.Drawing.Point(3, 0);
             this.lChipRegistrationNumber.Name = "lChipRegistrationNumber";
-            this.lChipRegistrationNumber.Size = new System.Drawing.Size(130, 26);
+            this.lChipRegistrationNumber.Size = new System.Drawing.Size(130, 27);
             this.lChipRegistrationNumber.TabIndex = 3;
             this.lChipRegistrationNumber.Text = "Chip Registration Number:";
             this.lChipRegistrationNumber.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -102,9 +104,9 @@
             // 
             this.lDateOfBirth.AutoSize = true;
             this.lDateOfBirth.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lDateOfBirth.Location = new System.Drawing.Point(3, 26);
+            this.lDateOfBirth.Location = new System.Drawing.Point(3, 27);
             this.lDateOfBirth.Name = "lDateOfBirth";
-            this.lDateOfBirth.Size = new System.Drawing.Size(130, 26);
+            this.lDateOfBirth.Size = new System.Drawing.Size(130, 27);
             this.lDateOfBirth.TabIndex = 4;
             this.lDateOfBirth.Text = "Date Of Birth:";
             this.lDateOfBirth.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -113,9 +115,9 @@
             // 
             this.lName.AutoSize = true;
             this.lName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lName.Location = new System.Drawing.Point(3, 52);
+            this.lName.Location = new System.Drawing.Point(3, 54);
             this.lName.Name = "lName";
-            this.lName.Size = new System.Drawing.Size(130, 26);
+            this.lName.Size = new System.Drawing.Size(130, 27);
             this.lName.TabIndex = 5;
             this.lName.Text = "Name:";
             this.lName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -134,7 +136,7 @@
             this.gbAnimal.Controls.Add(this.layout);
             this.gbAnimal.Location = new System.Drawing.Point(12, 39);
             this.gbAnimal.Name = "gbAnimal";
-            this.gbAnimal.Size = new System.Drawing.Size(272, 126);
+            this.gbAnimal.Size = new System.Drawing.Size(272, 156);
             this.gbAnimal.TabIndex = 8;
             this.gbAnimal.TabStop = false;
             this.gbAnimal.Text = "Animal";
@@ -144,30 +146,33 @@
             this.layout.ColumnCount = 2;
             this.layout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.layout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.layout.Controls.Add(this.lSpecialData, 0, 3);
+            this.layout.Controls.Add(this.lSpecialData, 0, 4);
             this.layout.Controls.Add(this.lChipRegistrationNumber, 0, 0);
             this.layout.Controls.Add(this.tbChipRegistrationNumber, 1, 0);
             this.layout.Controls.Add(this.lDateOfBirth, 0, 1);
             this.layout.Controls.Add(this.tbName, 1, 2);
             this.layout.Controls.Add(this.lName, 0, 2);
             this.layout.Controls.Add(this.dtpBirthday, 1, 1);
-            this.layout.Controls.Add(this.panel1, 1, 3);
+            this.layout.Controls.Add(this.panel1, 1, 4);
+            this.layout.Controls.Add(this.lGender, 0, 3);
+            this.layout.Controls.Add(this.ddbGender, 1, 3);
             this.layout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layout.Location = new System.Drawing.Point(3, 16);
             this.layout.Name = "layout";
-            this.layout.RowCount = 4;
+            this.layout.RowCount = 5;
             this.layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.layout.Size = new System.Drawing.Size(266, 107);
+            this.layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.layout.Size = new System.Drawing.Size(266, 137);
             this.layout.TabIndex = 13;
             // 
             // lSpecialData
             // 
             this.lSpecialData.AutoSize = true;
             this.lSpecialData.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lSpecialData.Location = new System.Drawing.Point(3, 78);
+            this.lSpecialData.Location = new System.Drawing.Point(3, 108);
             this.lSpecialData.Name = "lSpecialData";
             this.lSpecialData.Size = new System.Drawing.Size(130, 29);
             this.lSpecialData.TabIndex = 14;
@@ -177,7 +182,7 @@
             // tbName
             // 
             this.tbName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbName.Location = new System.Drawing.Point(139, 55);
+            this.tbName.Location = new System.Drawing.Point(139, 57);
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(124, 20);
             this.tbName.TabIndex = 9;
@@ -187,7 +192,7 @@
             this.dtpBirthday.CustomFormat = "dd-MM-yyy";
             this.dtpBirthday.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dtpBirthday.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpBirthday.Location = new System.Drawing.Point(139, 29);
+            this.dtpBirthday.Location = new System.Drawing.Point(139, 30);
             this.dtpBirthday.Name = "dtpBirthday";
             this.dtpBirthday.Size = new System.Drawing.Size(124, 20);
             this.dtpBirthday.TabIndex = 13;
@@ -197,7 +202,7 @@
             this.panel1.Controls.Add(this.dtpLastWalked);
             this.panel1.Controls.Add(this.tbBadHabits);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(139, 81);
+            this.panel1.Location = new System.Drawing.Point(139, 111);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(124, 23);
             this.panel1.TabIndex = 16;
@@ -220,13 +225,32 @@
             this.tbBadHabits.Size = new System.Drawing.Size(124, 20);
             this.tbBadHabits.TabIndex = 15;
             // 
+            // lGender
+            // 
+            this.lGender.AutoSize = true;
+            this.lGender.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lGender.Location = new System.Drawing.Point(3, 81);
+            this.lGender.Name = "lGender";
+            this.lGender.Size = new System.Drawing.Size(130, 27);
+            this.lGender.TabIndex = 17;
+            this.lGender.Text = "Gender";
+            // 
+            // ddbGender
+            // 
+            this.ddbGender.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ddbGender.FormattingEnabled = true;
+            this.ddbGender.Location = new System.Drawing.Point(139, 84);
+            this.ddbGender.Name = "ddbGender";
+            this.ddbGender.Size = new System.Drawing.Size(124, 21);
+            this.ddbGender.TabIndex = 18;
+            // 
             // gbAnimals
             // 
             this.gbAnimals.Controls.Add(this.lbFreeAnimals);
             this.gbAnimals.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbAnimals.Location = new System.Drawing.Point(3, 3);
             this.gbAnimals.Name = "gbAnimals";
-            this.gbAnimals.Size = new System.Drawing.Size(235, 147);
+            this.gbAnimals.Size = new System.Drawing.Size(335, 177);
             this.gbAnimals.TabIndex = 9;
             this.gbAnimals.TabStop = false;
             this.gbAnimals.Text = "Availlable Animals";
@@ -238,7 +262,7 @@
             this.lbFreeAnimals.FormattingEnabled = true;
             this.lbFreeAnimals.Location = new System.Drawing.Point(3, 16);
             this.lbFreeAnimals.Name = "lbFreeAnimals";
-            this.lbFreeAnimals.Size = new System.Drawing.Size(229, 128);
+            this.lbFreeAnimals.Size = new System.Drawing.Size(329, 158);
             this.lbFreeAnimals.TabIndex = 0;
             // 
             // cmsFreeAnimals
@@ -268,9 +292,9 @@
             // 
             this.groupBox1.Controls.Add(this.lbReservedAnimals);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(244, 3);
+            this.groupBox1.Location = new System.Drawing.Point(344, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(235, 147);
+            this.groupBox1.Size = new System.Drawing.Size(335, 177);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Reserved Animals";
@@ -282,7 +306,7 @@
             this.lbReservedAnimals.FormattingEnabled = true;
             this.lbReservedAnimals.Location = new System.Drawing.Point(3, 16);
             this.lbReservedAnimals.Name = "lbReservedAnimals";
-            this.lbReservedAnimals.Size = new System.Drawing.Size(229, 128);
+            this.lbReservedAnimals.Size = new System.Drawing.Size(329, 158);
             this.lbReservedAnimals.TabIndex = 0;
             // 
             // cmsReserved
@@ -322,19 +346,19 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(482, 153);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(682, 183);
             this.tableLayoutPanel1.TabIndex = 11;
             // 
             // AdministrationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 177);
+            this.ClientSize = new System.Drawing.Size(984, 207);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.gbAnimal);
             this.Controls.Add(this.createAnimalButton);
             this.Controls.Add(this.animalTypeComboBox);
-            this.MinimumSize = new System.Drawing.Size(541, 216);
+            this.MinimumSize = new System.Drawing.Size(800, 246);
             this.Name = "AdministrationForm";
             this.Text = "Animal Shelter Administration";
             this.gbAnimal.ResumeLayout(false);
@@ -378,6 +402,8 @@
         private System.Windows.Forms.ContextMenuStrip cmsReserved;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.Label lGender;
+        private System.Windows.Forms.ComboBox ddbGender;
 
     }
 }

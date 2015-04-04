@@ -18,8 +18,9 @@
         ///     The nasty habbits of the cat (e.g. "scratches the couch")
         ///     or null if none.
         /// </param>
-        public Cat(int chipRegistrationNumber, SimpleDate dateOfBirth, string name, string badHabits)
-            : base(chipRegistrationNumber, dateOfBirth, name)
+        /// <param name="gender"></param>
+        public Cat(int chipRegistrationNumber, SimpleDate dateOfBirth, string name, string badHabits, Gender gender)
+            : base(chipRegistrationNumber, dateOfBirth, name, gender)
         {
             BadHabits = badHabits;
         }

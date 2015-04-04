@@ -15,8 +15,10 @@
         /// <param name="dateOfBirth">The date of birth of the animal or null if unknown</param>
         /// <param name="name">The name of the animal or null if unknown</param>
         /// <param name="lastWalkDate">The date of the last walk with the dog or null if unknown.</param>
-        public Dog(int chipRegistrationNumber, SimpleDate dateOfBirth, string name, SimpleDate lastWalkDate)
-            : base(chipRegistrationNumber, dateOfBirth, name)
+        /// <param name="gender">The gender of the Dog</param>
+        public Dog(int chipRegistrationNumber, SimpleDate dateOfBirth, string name, SimpleDate lastWalkDate,
+            Gender gender)
+            : base(chipRegistrationNumber, dateOfBirth, name, gender)
         {
             LastWalkDate = lastWalkDate;
         }
