@@ -29,6 +29,14 @@ namespace AnimalShelter
         }
 
         /// <summary>
+        ///     Constructs a SimpleDate object with the current date & time as values
+        /// </summary>
+        public SimpleDate()
+        {
+            date = DateTime.Now;
+        }
+
+        /// <summary>
         ///     The day of the month
         /// </summary>
         public int Day

@@ -1,9 +1,11 @@
-﻿namespace AnimalShelter
+﻿using System;
+
+namespace AnimalShelter
 {
     /// <summary>
     ///     Class representing an animal in the shelter.
     /// </summary>
-    internal abstract class Animal : IPricable
+    internal abstract class Animal : IPricable, IComparable<Animal>
     {
         /// <summary>
         ///     The maximum length of the chip registration number.
@@ -58,22 +60,22 @@
         /// </summary>
         public bool Reserved { get; set; }
 
-        public abstract double Price { get; }
-
-        private static string FormatRegistrationNumber(string chipRegistrationNumber)
+        /// <summary>
+        ///     Compares the current object with another object of the same type.
+        /// </summary>
+        /// <returns>
+        ///     A value that indicates the relative order of the objects being compared. The return value has the following
+        ///     meanings: Value Meaning Less than zero This object is less than the <paramref name="other" /> parameter.Zero This
+        ///     object is equal to <paramref name="other" />. Greater than zero This object is greater than
+        ///     <paramref name="other" />.
+        /// </returns>
+        /// <param name="other">An object to compare with this object.</param>
+        public int CompareTo(Animal other)
         {
-            if (chipRegistrationNumber.Length < ChipRegistrationNumberLength)
-            {
-                return chipRegistrationNumber.PadLeft(ChipRegistrationNumberLength, '0');
-            }
-
-            if (chipRegistrationNumber.Length > ChipRegistrationNumberLength)
-            {
-                return chipRegistrationNumber.Substring(0, ChipRegistrationNumberLength);
-            }
-
-            return chipRegistrationNumber;
+            return ChipRegistrationNumber - other.ChipRegistrationNumber;
         }
+
+        public abstract double Price { get; }
 
         /// <summary>
         ///     Retrieves information about this animal

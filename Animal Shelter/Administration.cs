@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace AnimalShelter
@@ -7,9 +8,14 @@ namespace AnimalShelter
     {
         private readonly List<Animal> animals = new List<Animal>();
 
+        public IEnumerable<Animal> Animals
+        {
+            get { return animals; }
+        }
+
         public bool Add(Animal animal)
         {
-            if (FindAnimal(animal.ChipRegistrationNumber) != null)
+            if (FindAnimal(animal.ChipRegistrationNumber) == null)
             {
                 animals.Add(animal);
                 return true;

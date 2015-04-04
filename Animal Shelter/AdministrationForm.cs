@@ -27,10 +27,14 @@ namespace AnimalShelter
 
         private void CreateFakeData()
         {
-            AddAnimal(new Dog(12345, new SimpleDate(DateTime.Today.AddYears(-5)), "Hector", new SimpleDate(DateTime.Now),
-                Gender.Male));
-            AddAnimal(new Cat(12456, new SimpleDate(DateTime.Today.AddYears(-7)), "Henk", "Shits in the hallway",
-                Gender.Male));
+            int id = 12345;
+            AddAnimal(new Dog(++id, new SimpleDate(), "Hector", new SimpleDate(DateTime.Now), Gender.Male));
+            AddAnimal(new Cat(++id, new SimpleDate(), "Henk", "gasdgsasgd", Gender.Male));
+            AddAnimal(new Dog(++id, new SimpleDate(), "asgfas", new SimpleDate(DateTime.Now), Gender.Male));
+            AddAnimal(new Cat(++id, new SimpleDate(), "asgasdg", "asdgasdg", Gender.Female));
+            AddAnimal(new Dog(++id, new SimpleDate(), "asdgfadhfdsh", new SimpleDate(DateTime.Now), Gender.Female));
+            AddAnimal(new Cat(++id, new SimpleDate(), "agasdgas", "asgasda", Gender.Female));
+            AddAnimal(new Cat(5, new SimpleDate(), "agasdgas", "asgasda", Gender.Female));
         }
 
         private void AddAnimal(Animal a)
@@ -39,10 +43,22 @@ namespace AnimalShelter
             if (a.Reserved)
             {
                 lbReservedAnimals.Items.Add(a);
+
+                var animals = lbReservedAnimals.Items.Cast<Animal>().ToArray();
+                Array.Sort(animals);
+
+                lbReservedAnimals.Items.Clear();
+                lbReservedAnimals.Items.AddRange(animals);
             }
             else
             {
                 lbFreeAnimals.Items.Add(a);
+
+                var animals = lbFreeAnimals.Items.Cast<Animal>().ToArray();
+                Array.Sort(animals);
+
+                lbFreeAnimals.Items.Clear();
+                lbFreeAnimals.Items.AddRange(animals);
             }
         }
 
@@ -61,11 +77,11 @@ namespace AnimalShelter
             if (animalTypeComboBox.Text == "Dog")
             {
                 a = new Dog(registrationNumber, dateOfBirth, name, new SimpleDate(dtpLastWalked.Value),
-                    (Gender) ddbGender.SelectedItem);
+                    (Gender) ddbGender.SelectedIndex);
             }
             else
             {
-                a = new Cat(registrationNumber, dateOfBirth, name, tbBadHabits.Text, (Gender) ddbGender.SelectedItem);
+                a = new Cat(registrationNumber, dateOfBirth, name, tbBadHabits.Text, (Gender) ddbGender.SelectedIndex);
             }
 
             AddAnimal(a);
@@ -127,6 +143,21 @@ namespace AnimalShelter
             foreach (Animal animal in animals)
             {
                 lbReservedAnimals.Items.Remove(animal);
+            }
+        }
+
+        private void bRandomLoop_Click(object sender, EventArgs e)
+        {
+            foreach (Animal animal in administration.Animals)
+            {
+                if (animal is Dog)
+                {
+                    MessageBox.Show("LastWalkDate: " + (animal as Dog).LastWalkDate);
+                }
+                else if (animal is Cat)
+                {
+                    MessageBox.Show("BadHabits: " + (animal as Cat).BadHabits);
+                }
             }
         }
     }
