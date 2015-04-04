@@ -59,7 +59,7 @@ namespace AnimalShelter
         /// <returns>The number of days between this date and endDate.</returns>
         public int DaysDifference(SimpleDate date)
         {
-           return date.date.Subtract(this.date).Days;
+            return date.date.Subtract(this.date).Days;
         }
 
         /// <summary>

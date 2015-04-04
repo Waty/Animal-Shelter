@@ -18,7 +18,7 @@
         ///     The nasty habbits of the cat (e.g. "scratches the couch")
         ///     or null if none.
         /// </param>
-        public Cat(string chipRegistrationNumber, SimpleDate dateOfBirth, string name, string badHabits)
+        public Cat(int chipRegistrationNumber, SimpleDate dateOfBirth, string name, string badHabits)
             : base(chipRegistrationNumber, dateOfBirth, name)
         {
             BadHabits = badHabits;
@@ -31,6 +31,17 @@
         ///     or null if the cat shows no bad habits.
         /// </summary>
         public string BadHabits { get; private set; }
+
+        public override double Price
+        {
+            get
+            {
+                int price = 60 - BadHabits.Length;
+                return price < 20
+                    ? 20
+                    : price;
+            }
+        }
 
         /// <summary>
         ///     Retrieve information about this cat

@@ -3,12 +3,12 @@
     /// <summary>
     ///     Class representing an animal in the shelter.
     /// </summary>
-    internal class Animal
+    internal abstract class Animal : IPricable
     {
         /// <summary>
         ///     The maximum length of the chip registration number.
         /// </summary>
-        private const int ChipRegistrationNumberMaxLength = 5;
+        private const int ChipRegistrationNumberLength = 5;
 
         /// <summary>
         ///     Creates an animal.
@@ -22,21 +22,9 @@
         /// </param>
         /// <param name="dateOfBirth">The date of birth of the animal or null if unknown</param>
         /// <param name="name">The name of the animal or null if unknown</param>
-        public Animal(string chipRegistrationNumber, SimpleDate dateOfBirth, string name)
+        protected Animal(int chipRegistrationNumber, SimpleDate dateOfBirth, string name)
         {
-            if (chipRegistrationNumber.Length < ChipRegistrationNumberMaxLength)
-            {
-                ChipRegistrationNumber = chipRegistrationNumber.PadLeft(ChipRegistrationNumberMaxLength, '0');
-            }
-            else if (chipRegistrationNumber.Length > ChipRegistrationNumberMaxLength)
-            {
-                ChipRegistrationNumber = chipRegistrationNumber.Substring(0, ChipRegistrationNumberMaxLength);
-            }
-            else
-            {
-                ChipRegistrationNumber = chipRegistrationNumber;
-            }
-
+            ChipRegistrationNumber = chipRegistrationNumber;
             DateOfBirth = dateOfBirth;
             Name = name;
             Reserved = false;
@@ -47,7 +35,7 @@
         /// <summary>
         ///     A five digit number containing the registration number of the animal.
         /// </summary>
-        public string ChipRegistrationNumber { get; private set; }
+        public int ChipRegistrationNumber { get; private set; }
 
         /// <summary>
         ///     Date of birth of the animal. Contains null if unknown.
@@ -65,10 +53,25 @@
         /// </summary>
         public bool Reserved { get; set; }
 
+        public abstract double Price { get; }
+
+        private static string FormatRegistrationNumber(string chipRegistrationNumber)
+        {
+            if (chipRegistrationNumber.Length < ChipRegistrationNumberLength)
+            {
+                return chipRegistrationNumber.PadLeft(ChipRegistrationNumberLength, '0');
+            }
+
+            if (chipRegistrationNumber.Length > ChipRegistrationNumberLength)
+            {
+                return chipRegistrationNumber.Substring(0, ChipRegistrationNumberLength);
+            }
+
+            return chipRegistrationNumber;
+        }
+
         /// <summary>
-        ///     Retrieve information about this animal
-        ///     Note: Every class inherits (automagically) from the 'Object' class,
-        ///     which contains the virtual ToString() method which you can override.
+        ///     Retrieves information about this animal
         /// </summary>
         /// <returns>
         ///     A string containing the information of this animal.
@@ -79,8 +82,8 @@
             string nameString = string.IsNullOrEmpty(Name) ? "noname" : Name;
             string isReservedString = Reserved ? "reserved" : "not reserved";
 
-            return string.Format("{0}, {1}, {2}, {3}", ChipRegistrationNumber, dateOfBirthString, nameString,
-                isReservedString);
+            return string.Format("{0}, {1}, {2}, {3}, {4}", ChipRegistrationNumber.ToString("D5"), dateOfBirthString, nameString,
+                isReservedString, Price.ToString("C"));
         }
     }
 }

@@ -24,9 +24,9 @@ namespace AnimalShelter
 
         private void CreateFakeData()
         {
-            AddAnimal(new Dog("12345", new SimpleDate(DateTime.Today.AddYears(-5)), "Hector",
+            AddAnimal(new Dog(12345, new SimpleDate(DateTime.Today.AddYears(-5)), "Hector",
                 new SimpleDate(DateTime.Now)));
-            AddAnimal(new Cat("12456", new SimpleDate(DateTime.Today.AddYears(-7)), "Henk", "Shits in the hallway"));
+            AddAnimal(new Cat(12456, new SimpleDate(DateTime.Today.AddYears(-7)), "Henk", "Shits in the hallway"));
         }
 
         private void AddAnimal(Animal a)
@@ -49,7 +49,7 @@ namespace AnimalShelter
         /// </summary>
         private void createAnimalButton_Click(object sender, EventArgs e)
         {
-            string registrationNumber = tbChipRegistrationNumber.Text;
+            int registrationNumber = Convert.ToInt32(tbChipRegistrationNumber.Text);
             var dateOfBirth = new SimpleDate(dtpBirthday.Value);
             string name = tbName.Text;
 

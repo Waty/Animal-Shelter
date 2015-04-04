@@ -9,28 +9,28 @@ namespace AnimalShelter
 
         public bool Add(Animal animal)
         {
-            if (FindAnimal(animal.ChipRegistrationNumber) == null)
+            if (FindAnimal(animal.ChipRegistrationNumber) != null)
             {
-                return false;
+                animals.Add(animal);
+                return true;
             }
 
-            animals.Add(animal);
-            return true;
+            return false;
         }
 
-        public bool RemoveAnimal(string chipRegistrationNumber)
+        public bool RemoveAnimal(int chipRegistrationNumber)
         {
             Animal animal = FindAnimal(chipRegistrationNumber);
-            if (animal == null)
+            if (animal != null)
             {
-                return false;
+                animals.Remove(animal);
+                return true;
             }
 
-            animals.Remove(animal);
-            return true;
+            return false;
         }
 
-        public Animal FindAnimal(string chipRegistrationNumber)
+        public Animal FindAnimal(int chipRegistrationNumber)
         {
             return animals.FirstOrDefault(a => a.ChipRegistrationNumber == chipRegistrationNumber);
         }

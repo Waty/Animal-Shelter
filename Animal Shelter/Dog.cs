@@ -15,7 +15,7 @@
         /// <param name="dateOfBirth">The date of birth of the animal or null if unknown</param>
         /// <param name="name">The name of the animal or null if unknown</param>
         /// <param name="lastWalkDate">The date of the last walk with the dog or null if unknown.</param>
-        public Dog(string chipRegistrationNumber, SimpleDate dateOfBirth, string name, SimpleDate lastWalkDate)
+        public Dog(int chipRegistrationNumber, SimpleDate dateOfBirth, string name, SimpleDate lastWalkDate)
             : base(chipRegistrationNumber, dateOfBirth, name)
         {
             LastWalkDate = lastWalkDate;
@@ -25,6 +25,16 @@
         ///     The date of the last walk of the dog. Contains null if unknown.
         /// </summary>
         public SimpleDate LastWalkDate { get; private set; }
+
+        public override double Price
+        {
+            get
+            {
+                return ChipRegistrationNumber < 50000
+                    ? 200
+                    : 350;
+            }
+        }
 
         /// <summary>
         ///     Retrieve information about this dog
