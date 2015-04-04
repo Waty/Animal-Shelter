@@ -39,7 +39,7 @@
 
             DateOfBirth = dateOfBirth;
             Name = name;
-            IsReserved = false;
+            Reserved = false;
         }
 
         // Backing fields for properties, see actual properties for their description.
@@ -63,7 +63,7 @@
         ///     Is the animal reserved yes or no.
         ///     An animal in the shelter can be reserved by the future owner.
         /// </summary>
-        public bool IsReserved { get; set; }
+        public bool Reserved { get; set; }
 
         /// <summary>
         ///     Retrieve information about this animal
@@ -77,7 +77,7 @@
         {
             string dateOfBirthString = DateOfBirth == null ? "00-00-0000" : DateOfBirth.ToString();
             string nameString = string.IsNullOrEmpty(Name) ? "noname" : Name;
-            string isReservedString = IsReserved ? "reserved" : "not reserved";
+            string isReservedString = Reserved ? "reserved" : "not reserved";
 
             return string.Format("{0}, {1}, {2}, {3}", ChipRegistrationNumber, dateOfBirthString, nameString,
                 isReservedString);

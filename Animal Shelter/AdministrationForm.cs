@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace AnimalShelter
@@ -6,9 +8,9 @@ namespace AnimalShelter
     public partial class AdministrationForm : Form
     {
         /// <summary>
-        ///     The (only) animal in this administration (for now....)
+        ///     The administration
         /// </summary>
-        private Animal animal;
+        private readonly Administration administration = new Administration();
 
         /// <summary>
         ///     Creates the form for doing adminstrative tasks
@@ -17,7 +19,27 @@ namespace AnimalShelter
         {
             InitializeComponent();
             animalTypeComboBox.SelectedIndex = 0;
-            animal = null;
+            CreateFakeData();
+        }
+
+        private void CreateFakeData()
+        {
+            AddAnimal(new Dog("12345", new SimpleDate(DateTime.Today.AddYears(-5)), "Hector",
+                new SimpleDate(DateTime.Now)));
+            AddAnimal(new Cat("12456", new SimpleDate(DateTime.Today.AddYears(-7)), "Henk", "Shits in the hallway"));
+        }
+
+        private void AddAnimal(Animal a)
+        {
+            administration.Add(a);
+            if (a.Reserved)
+            {
+                lbReservedAnimals.Items.Add(a);
+            }
+            else
+            {
+                lbFreeAnimals.Items.Add(a);
+            }
         }
 
         /// <summary>
@@ -31,53 +53,75 @@ namespace AnimalShelter
             var dateOfBirth = new SimpleDate(dtpBirthday.Value);
             string name = tbName.Text;
 
-            switch (animalTypeComboBox.Text)
+            Animal a;
+            if (animalTypeComboBox.Text == "Dog")
             {
-                case "Dog":
-                    animal = new Dog(registrationNumber, dateOfBirth, name,
-                        new SimpleDate(DateTime.Parse(tbSpecialData.Text)));
-                    break;
-
-                case "Cat":
-                    animal = new Cat(registrationNumber, dateOfBirth, name, tbSpecialData.Text);
-                    break;
-
-                default:
-                    animal = null;
-                    break;
-            }
-        }
-
-        /// <summary>
-        ///     Show the info of the animal referenced by the 'animal' field.
-        /// </summary>
-        private void showInfoButton_Click(object sender, EventArgs e)
-        {
-            if (animal != null)
-            {
-                MessageBox.Show(animal.ToString(), "Info");
+                a = new Dog(registrationNumber, dateOfBirth, name, new SimpleDate(dtpLastWalked.Value));
             }
             else
             {
-                MessageBox.Show("There was no animal");
+                a = new Cat(registrationNumber, dateOfBirth, name, tbBadHabits.Text);
+            }
+
+            AddAnimal(a);
+        }
+
+        /// <summary>
+        ///     Changes the UI to enable adding the selected species
+        /// </summary>
+        private void animalTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (animalTypeComboBox.Text == "Dog")
+            {
+                lSpecialData.Text = "Last Walk Date";
+                dtpLastWalked.Visible = true;
+                tbBadHabits.Visible = false;
+            }
+            else
+            {
+                lSpecialData.Text = "Bad Habits";
+                dtpLastWalked.Visible = false;
+                tbBadHabits.Visible = true;
             }
         }
 
-        private void animalTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void tsmiReserveAnimal_Click(object sender, EventArgs e)
         {
-            switch (animalTypeComboBox.Text)
+            List<Animal> animals = lbFreeAnimals.SelectedItems.Cast<Animal>().ToList();
+            foreach (Animal a in animals)
             {
-                case "Dog":
-                    lSpecialData.Text = "Last Walk Date";
-                    break;
+                a.Reserved = true;
+                lbFreeAnimals.Items.Remove(a);
+                lbReservedAnimals.Items.Add(a);
+            }
+        }
 
-                case "Cat":
-                    lSpecialData.Text = "Bad Habits";
-                    break;
+        private void tsmiDeleteFreeAnimal_Click(object sender, EventArgs e)
+        {
+            List<Animal> animals = lbFreeAnimals.SelectedItems.Cast<Animal>().ToList();
+            foreach (Animal animal in animals)
+            {
+                lbFreeAnimals.Items.Remove(animal);
+            }
+        }
 
-                default:
-                    lSpecialData.Text = "Special Data";
-                    break;
+        private void tsmiUndoReservation_Click(object sender, EventArgs e)
+        {
+            List<Animal> animals = lbReservedAnimals.SelectedItems.Cast<Animal>().ToList();
+            foreach (Animal a in animals)
+            {
+                a.Reserved = false;
+                lbFreeAnimals.Items.Add(a);
+                lbReservedAnimals.Items.Remove(a);
+            }
+        }
+
+        private void tsmiDeleteReservedAnimal_Click(object sender, EventArgs e)
+        {
+            List<Animal> animals = lbReservedAnimals.SelectedItems.Cast<Animal>().ToList();
+            foreach (Animal animal in animals)
+            {
+                lbReservedAnimals.Items.Remove(animal);
             }
         }
     }

@@ -23,7 +23,10 @@ namespace AnimalShelter
             date = new DateTime(year, month, day);
         }
 
-        public SimpleDate(DateTime date) : this(date.Day, date.Month, date.Year) {}
+        public SimpleDate(DateTime date)
+        {
+            this.date = date;
+        }
 
         /// <summary>
         ///     The day of the month
@@ -56,8 +59,7 @@ namespace AnimalShelter
         /// <returns>The number of days between this date and endDate.</returns>
         public int DaysDifference(SimpleDate date)
         {
-            TimeSpan timespan = date.date.Subtract(this.date);
-            return timespan.Days;
+           return date.date.Subtract(this.date).Days;
         }
 
         /// <summary>
